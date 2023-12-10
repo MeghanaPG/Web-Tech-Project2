@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project-2 Website</title>
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Website main heading -->
+    <h1>Massachusetts Institute of Technology</h1>
+    <header>
+        <nav>
+            <a>Home</a>
+            <a>Contact</a>
+            <a>Admissions</a>
+            <a>MIT Life</a>
+            <a>Research</a>
+        </nav>
+    </header>
+
+    <!-- Images for sliding operation -->
+    <div id="image-carousel">
+        <div class="carousel">
+            <div class="slideImg">
+                <img src="assets/images/mit_front.jpg" alt="MIT Front Picture">
+            </div>
+            <div class="slideImg">
+                <img src="assets/images/mit1.jpg" alt="MIT Pillar">
+            </div>
+            <div class="slideImg">
+                <img src="assets/images/mit_night.jpg" alt="MIT at night">
+            </div>
+            <div class="slideImg">
+                <img src="assets/images/MIT_emblem.jpg" alt="MIT Emblem Image">
+            </div>
+            <div class="slideImg">
+                <img src="assets/images/MIT_Campus_Img.jpg" alt="MIT Campus Image">
+            </div>
+            <div class="slideImg">
+                <img src="assets/images/MIT_Campus.jpg" alt="MIT Campus Stone Architecture Image">
+            </div>
+        </div>
+        <div class="prev" onclick="prevSlide()">&#10094;</div>
+        <div class="next" onclick="nextSlide()">&#10095;</div>
+    </div>
+
+    <div class="container">
+        <div class="subheading">
+            <h3>MIT Game Lab</h3>
+            <p>Apart from its fun open houses, the Game Lab also arranges
+                research projects and offers courses under the MIT Comparative Media
+                Studies/Writing (CMS/W) program.</p>
+        </div>
+
+        <div class="subheading">
+            <h3>MIT Media Lab</h3>
+            <p>The MIT Media Lab is a research laboratory at the Massachusetts Institute of Technology that grows out
+                of the School of Architecture, the Architectural Machines Group of MIT.</p>
+        </div>
+
+        <div class="subheading">
+            <h3>MIT Lincoln Laboratory</h3>
+            <p>MIT Lincoln Laboratory is a research and
+                development center of the US Department of Defense designed to apply advanced
+                technology to national security challenges.</p>
+        </div>
+    </div>
+
+    <div id="mitrankingimg-container">
+        <img src="assets/images/Rankings.jpg" alt="MIT Rankings Image">
+    </div>
+
+    <div class="grid-container">
+        <div id="mitailabimg-container">
+            <img src="assets/images/mit_AI_Lab.jpg" alt="MIT AI Lab Image">
+        </div>
+    </div>
+
+    <!-- using mp4 content in the webiste -->
+    <video class="mp4-container" controls autoplay muted>
+        <source src="assets/media/gaming.mp4" type="video/mp4">
+    </video>
+
+    <h2>MIT Establishment</h2>
+    <p>
+        The Massachusetts Institute of Technology (MIT) is a private research university located in
+        Cambridge, Massachusetts. Founded in 1861, MIT has played an important role in the
+        development of many areas of modern technology and science. MIT was founded in response to the growing industrialization of the United States and adopted
+        the European model of an applied university and emphasized laboratory teaching in applied
+        science and technology. MIT is one of three private land grant institutions in the United States,
+        the others being Cornell University and Tuskegee University. 
+        The institute has an urban campus that stretches over 1 mile (1.6 km) along the Charles River and contains several notable off-
+        campus facilities, including MIT's Lincoln Laboratory, the Bates Center, and the Haystack
+        Observatory, as well as affiliated laboratories such as the Broad and Whitehead Institutes.
+    </p>
+
+    <ul>
+        <li>Projects like Project MAC, the Artificial Intelligence Laboratory, and the Tech Model Railroad Club contributed to the development of modern networking and computing technologies.</li>
+        <li>The GNU Project and the Free Software Foundation, led by Richard Stallman, were established at the AI Lab.</li>
+        <li>In 1985, Nicholas Negroponte and Jerome Wiesner founded the MIT Media Lab, focusing on innovative applications of computer technology.</li>
+    </ul>
+
+    
+    <!-- Utilizing Javascript -->
+    <script>
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            const carousel = document.querySelector('.carousel');
+            const slides = document.querySelectorAll('.slideImg');
+            if (index >= 0 && index < slides.length) {
+                currentSlide = index;
+                const translateValue = -index * 620; // the value 620 can be adjusted based on our convenience 
+                carousel.style.transform = `translateX(${translateValue}px)`;
+            }
+        }
+        // to navigate to prev image 
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        // to go to next image 
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+    </script>
+
+<div id="video-container"></div>
+
+    <!-- Embedding the Youtube Video using Script -->
+    <script>
+        // embedding the youtube video
+        const VideoBackground = () => {
+            document.getElementById('video-container').innerHTML= `<iframe width="560" height="315" src="https://www.youtube.com/embed/K1iTqjGDmbE?si=mz4WCP5j4nOiMVYy&autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+        };
+
+        VideoBackground();
+    </script>
+
+<h3>Student Interest Form</h3>
+
+<!-- Using the form component -->
+<form action="/submit_form" method="post">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+  
+    <br>
+  
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+  
+    <br>
+  
+    <label for="message">Why are you interested in joining MIT?:</label>
+    <textarea id="message" name="message" rows="2" required></textarea>
+  
+    <br>
+  
+    <input type="submit" value="Submit">
+</form>
+
+<!-- Form validation using Javascript -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelector('form').addEventListener('submit', function (event) {
+            // to display validation messages
+            function showAlert(message) {
+                alert(message);
+                event.preventDefault();
+            }
+
+            // Validation for the name field
+            var fullName = document.getElementById('name').value;
+            var names = fullName.split(' ');
+
+            // Check if at least a first name and last name are entered
+            if (names.length < 2 || names[0].trim() === '' || names[1].trim() === '') {
+                showAlert('Please enter both your first and last names');
+                return;
+            }
+
+            // the email field validation
+            var email = document.getElementById('email').value;
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showAlert('Please enter a valid email address');
+                return;
+            }
+
+            // message field validation 
+            var message = document.getElementById('message').value;
+            if (message.trim() === '') {
+                showAlert('Please enter a message');
+                return;
+            }
+        });
+    });
+</script>
+
+<!-- Using the footer component -->
+<footer class="footer">&copy;Dec, 2023 Student Meghana Pura Ganapathi</footer>
+
+</body>
+</html>
